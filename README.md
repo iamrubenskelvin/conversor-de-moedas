@@ -67,6 +67,4 @@ Este projeto foi criado para praticar:
 * Responsividade
 * Estruturação de projetos Front-End
 * Integração com Git e GitHub
-
-
-Real <a href="https://www.flaticon.com/free-icons/brazilian-real" title="brazilian real icons">Brazilian real icons created by NajmunNahar - Flaticon</a>
+="https://www.flaticon.com/free-icons/brazilian-real" title="brazilian real icons">Brazilian real icons created by NajmunNahar - Flaticon</a>
