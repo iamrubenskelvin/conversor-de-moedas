@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>DevClub - Convert Money</title>
+  </head>
+
+  <body>
+    <img
+      class="logo-principal"
+      src="./assets/todas moeadas black.gif"
+      alt="logo-projeto-devClub-money"
+    />
+
+    <main>
+      <label>
+        Converter <b>de</b>
+
+        <select id="moeda-de">
+          <option value="BRL">R$ Real brasileiro</option>
+          <option value="USD">US$ Dólar americano</option>
+          <option value="EUR">€ Euro</option>
+          <option value="GBP">£ Libra esterlina</option>
+          <option value="ARS">$ Peso argentino</option>
+        </select>
+      </label>
+
+      <label>
+        Converter <b>para</b>
+
+        <select id="moeda-para">
+          <option value="USD">US$ Dólar americano</option>
+          <option value="EUR">€ Euro</option>
+          <option value="GBP">£ Libra esterlina</option>
+          <option value="ARS">$ Peso argentino</option>
+          <option value="BRL">R$ Real brasileiro</option>
+        </select>
+      </label>
+
+      <label>
+        valor
+        <input id="valor" placeholder="Digite o valor" />
+      </label>
+
+      <button id="button-play">Converter</button>
+
+      <section>
+        <div class="bandeiras">
+          <img
+            id="img-moeda-de"
+            src="./assets/Brasil real imagem.png"
+            alt="moeda de"
+          />
+
+          <p id="nome-moeda-de" class="moeda">Real brasileiro</p>
+
+          <p id="valor-moeda-de" class="moeda-value">R$ 0,00</p>
+        </div>
+
+        <img
+          class="arrow-down"
+          src="./assets/seta baixo.png"
+          alt="seta-p-baixo"
+        />
+
+        <div class="bandeiras">
+          <img
+            id="img-moeda-para"
+            src="./assets/bandeira eua.png"
+            alt="moeda para"
+          />
+
+          <p id="nome-moeda-para" class="moeda">Dólar americano</p>
+
+          <p id="valor-moeda-para" class="moeda-value">US$ 0,00</p>
+        </div>
+      </section>
+    </main>
+
+    <p id="resultado">Resultado aparecerá aqui</p>
+  </body>
+
+  <script src="./script.js"></script>
+</html>

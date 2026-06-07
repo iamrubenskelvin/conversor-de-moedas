@@ -1,0 +1,134 @@
+*{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Roboto", sans-serif;
+      outline: none;
+
+
+}
+
+body{
+      background-color: rgb(255, 255, 255);
+
+}
+
+
+main {
+      width: 90%;
+      max-width: 420px;
+      background: blanchedalmond;
+      border-radius: 20px;
+      margin: 0 auto 40px;
+      padding: 44px 24px 23px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+
+}
+
+
+label{
+      color: #777777;
+      font-weight: 400;
+      font-size: 14px;
+}
+
+select, input{
+      background: white;
+      border: 1px solid #BBBBBB;
+      border-radius: 4px;
+      height: 48px;
+      width: 100%;
+      margin-bottom: 24px;
+      padding:0 18px;
+      font-weight: 700;
+      font-size: 16px;
+      color: #555555;
+      cursor: pointer;
+      
+}
+
+button{
+      background: #772FD3;
+      border-radius: 5px;
+      width: 100%;
+      border: none;
+      height: 48px;
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+}
+
+button.hover{
+      opacity: 0.8;
+}
+
+button.active{
+      opacity: 0.6;
+}
+
+section{
+      border: 1px solid #772fd3;
+      border-radius: 20px;
+      margin-top: 36px;
+      padding: 12px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+}
+
+
+img {
+      width: 30px;
+}
+
+.logo-principal {
+      width: 300px;
+      display: block;
+      margin: 20px auto;
+}
+
+.arrow-down{
+      margin: 15px;
+}
+
+
+
+.bandeiras{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+}
+
+.bandeiras img {
+      width: 85px;
+      height: 85px;
+      object-fit: cover;
+      border-radius: 50%;
+}
+
+.bandeiras p {
+      text-align: center;
+}
+
+.moeda{
+      color: #777777;
+      font-size: 14px ;
+
+}
+
+.moeda-value{
+      color: #555555;
+      font-weight: 700;
+      font-size: 20px;
+}
+
+[src*="libra4"] {
+      transform: scale(1.30);
+}
+
+
+
