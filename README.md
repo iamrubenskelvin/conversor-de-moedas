@@ -45,7 +45,7 @@ index.html
 
 ## 🌐 Projeto online
 
-Em breve no Netlify 🚀
+https://moneyconvertbr.netlify.app/
 
 ## 👨‍💻 Autor
 
