@@ -1,94 +1,174 @@
-const valorInput = document.querySelector("#valor");
-const moedaDe = document.querySelector("#moeda-de");
-const MoedaPara = document.querySelector("#moeda-para");
-const botao = document.querySelector("#button-play");
-const resultadoTexto = document.querySelector("#resultado");
+const buttonplay = document.querySelector("#button-play");
+const moedaParaSelect = document.querySelector("#moeda-para");
+const moedaDeSelect = document.querySelector("#moeda-de");
 
-const imgMoedaDe = document.querySelector("#img-moeda-de");
-const nomeMoedaDe = document.querySelector("#nome-moeda-de");
-const valorMoedaDe = document.querySelector("#valor-moeda-de");
+const convertValues = async () => {
+  const valor = Number(document.querySelector("#valor").value);
 
-const imgMoedaPara = document.querySelector("#img-moeda-para");
-const nomeMoedaPara = document.querySelector("#nome-moeda-para");
-const valorMoedaPara = document.querySelector("#valor-moeda-para");
+  const moedaDe = document.querySelector("#valor-moeda-de");
+  const moedaPara = document.querySelector("#valor-moeda-para");
 
-const moedas = {
-  BRL: {
-    nome: "Real brasileiro",
-    imagem: "./assets/brazilian-real.png"
-  },
+  const data = await fetch(
+    "https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,GBP-BRL,ARS-BRL"
+  ).then((response) => response.json());
 
-  USD: {
-    nome: "Dólar americano",
-    imagem: "./assets/dollar.png"
-  },
+  const dollarToDay = Number(data.USDBRL.bid);
+  const euroToDay = Number(data.EURBRL.bid);
+  const poundToDay = Number(data.GBPBRL.bid);
+  const pesoToDay = Number(data.ARSBRL.bid);
 
-  EUR: {
-    nome: "Euro",
-    imagem: "./assets/euro.png"
-  },
+  let valorEmReal = 0;
+  let resultado = 0;
 
-  GBP: {
-    nome: "Libra esterlina",
-    imagem: "./assets/libra4.png"
-  },
-
-  ARS: {
-    nome: "Peso argentino",
-    imagem: "./assets/peso argentino.png"
+  // CONVERTE A MOEDA DE ORIGEM PARA REAL
+  if (moedaDeSelect.value == "BRL") {
+    valorEmReal = valor;
   }
-}
 
-const simbolos = {
-  BRL: "R$",
-  USD: "US$",
-  EUR: "€",
-  GBP: "£",
-  ARS: "$",
+  if (moedaDeSelect.value == "USD") {
+    valorEmReal = valor * dollarToDay;
+  }
+
+  if (moedaDeSelect.value == "EUR") {
+    valorEmReal = valor * euroToDay;
+  }
+
+  if (moedaDeSelect.value == "GBP") {
+    valorEmReal = valor * poundToDay;
+  }
+
+  if (moedaDeSelect.value == "ARS") {
+    valorEmReal = valor * pesoToDay;
+  }
+
+  // CONVERTE DO REAL PARA A MOEDA ESCOLHIDA
+  if (moedaParaSelect.value == "BRL") {
+    resultado = valorEmReal;
+
+    moedaPara.innerHTML = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(resultado);
+  }
+
+  if (moedaParaSelect.value == "USD") {
+    resultado = valorEmReal / dollarToDay;
+
+    moedaPara.innerHTML = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(resultado);
+  }
+
+  if (moedaParaSelect.value == "EUR") {
+    resultado = valorEmReal / euroToDay;
+
+    moedaPara.innerHTML = new Intl.NumberFormat("de-DE", {
+      style: "currency",
+      currency: "EUR",
+    }).format(resultado);
+  }
+
+  if (moedaParaSelect.value == "GBP") {
+    resultado = valorEmReal / poundToDay;
+
+    moedaPara.innerHTML = new Intl.NumberFormat("en-GB", {
+      style: "currency",
+      currency: "GBP",
+    }).format(resultado);
+  }
+
+  if (moedaParaSelect.value == "ARS") {
+    resultado = valorEmReal / pesoToDay;
+
+    moedaPara.innerHTML = new Intl.NumberFormat("es-AR", {
+      style: "currency",
+      currency: "ARS",
+    }).format(resultado);
+  }
+
+  // MOSTRA A MOEDA DE ORIGEM
+  moedaDe.innerHTML = new Intl.NumberFormat(
+    moedaDeSelect.value == "USD"
+      ? "en-US"
+      : moedaDeSelect.value == "EUR"
+      ? "de-DE"
+      : moedaDeSelect.value == "GBP"
+      ? "en-GB"
+      : moedaDeSelect.value == "ARS"
+      ? "es-AR"
+      : "pt-BR",
+    {
+      style: "currency",
+      currency: moedaDeSelect.value,
+    }
+  ).format(valor);
 };
 
-async function converter() {
-  const de = moedaDe.value;
-  const para = MoedaPara.value;
+function changeCurrency() {
+  const currencyName = document.querySelector("#nome-moeda-para");
+  const currencyImg = document.querySelector("#img-moeda-para");
 
-  const valor = Number(valorInput.value);
+  if (moedaParaSelect.value == "BRL") {
+    currencyName.innerHTML = "Real Brasileiro";
+    currencyImg.src = "./assets/brazilian-real.png";
+  }
 
-  imgMoedaDe.src = moedas[de].imagem;
-  nomeMoedaDe.innerHTML = moedas[de].nome;
+  if (moedaParaSelect.value == "USD") {
+    currencyName.innerHTML = "Dólar Americano";
+    currencyImg.src = "./assets/dollar.png";
+  }
 
-  imgMoedaPara.src = moedas[para].imagem;
-  nomeMoedaPara.innerHTML = moedas[para].nome;
+  if (moedaParaSelect.value == "EUR") {
+    currencyName.innerHTML = "Euro";
+    currencyImg.src = "./assets/euro.png";
+  }
 
-  valorMoedaDe.innerHTML =
-    simbolos[de] +
-    " " +
-    valor.toLocaleString("pt-BR", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
+  if (moedaParaSelect.value == "GBP") {
+    currencyName.innerHTML = "Libra Esterlina";
+    currencyImg.src = "./assets/libra4.png";
+  }
 
-  const resposta = await fetch(`https://open.er-api.com/v6/latest/${de}`);
+  if (moedaParaSelect.value == "ARS") {
+    currencyName.innerHTML = "Peso Argentino";
+    currencyImg.src = "./assets/peso argentino.png";
+  }
 
-  const dados = await resposta.json();
-
-  const taxa = dados.rates[para];
-
-  const resultado = valor * taxa;
-
-  valorMoedaPara.innerHTML =
-    simbolos[para] +
-    " " +
-    resultado.toLocaleString("pt-BR", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
+  convertValues();
 }
 
-botao.addEventListener("click", converter);
+function changeCurrencyFrom() {
+  const currencyName = document.querySelector("#nome-moeda-de");
+  const currencyImg = document.querySelector("#img-moeda-de");
 
-valorInput.addEventListener("keypress", function(event){
-
-  if(event.key === "Enter"){
-      converter()
+  if (moedaDeSelect.value == "BRL") {
+    currencyName.innerHTML = "Real Brasileiro";
+    currencyImg.src = "./assets/brazilian-real.png";
   }
-  })
+
+  if (moedaDeSelect.value == "USD") {
+    currencyName.innerHTML = "Dólar Americano";
+    currencyImg.src = "./assets/dollar.png";
+  }
+
+  if (moedaDeSelect.value == "EUR") {
+    currencyName.innerHTML = "Euro";
+    currencyImg.src = "./assets/euro.png";
+  }
+
+  if (moedaDeSelect.value == "GBP") {
+    currencyName.innerHTML = "Libra Esterlina";
+    currencyImg.src = "./assets/libra4.png";
+  }
+
+  if (moedaDeSelect.value == "ARS") {
+    currencyName.innerHTML = "Peso Argentino";
+    currencyImg.src = "./assets/peso argentino.png";
+  }
+
+  convertValues();
+}
+
+moedaParaSelect.addEventListener("change", changeCurrency);
+moedaDeSelect.addEventListener("change", changeCurrencyFrom);
+buttonplay.addEventListener("click", convertValues);
